@@ -3,12 +3,12 @@
     <div class="content">
       <div class="login-left">
         <div class="date">{{ date }}</div>
-        <div class="englishTitle">OPENSHARE</div>
-        <div class="title">大型仪器设备共享服务平台</div>
+        <div class="englishTitle">KANGYANG</div>
+        <div class="title">数字康养服务平台</div>
       </div>
       <div class="login-right">
         <div class="login-title">
-          我的平台 <img class="img" src="../../assets/vue.svg" alt="" />
+          数字康养 <img class="img" src="../../assets/vue.svg" alt="" />
         </div>
         <a-form :model="form" class="login-form" @finish="submit">
           <a-form-item name="username" style="margin-bottom:30px;" :rules="[{ required: true, message: '请输入用户名' }]">
@@ -38,12 +38,12 @@
   import { reactive, ref, onBeforeMount } from 'vue'
   import { useUserStore } from '@/store/user'
   import { notification } from 'ant-design-vue'
-  import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
   import { useRouter } from 'vue-router'
   import moment from 'moment'
   import { login, getUser } from '@/api/user'
 
   const { setToken, setUserInfo } = useUserStore()
+  const userSotre = useUserStore()
   const router = useRouter()
   const loading = ref(false)
   const form = reactive({
@@ -56,13 +56,23 @@
       "password": values.password
     }
     loading.value = true
-    login(data).then((res: any) => {
+    await login(data).then((res: any) => {
       if (res.success) {
         let token = res.data.tokenHead + res.data.token
         setToken(token)
       }
+    }).catch(err => {
+      notification[ 'error' ]({
+        message: err.code,
+        description: `${err.message}，欢迎回来`,
+        duration: 2
+      })
     })
-    getUser().then((res: any) => {
+    if (!userSotre.token) {
+      loading.value = false
+      return
+    }
+    await getUser().then((res: any) => {
       if (res.success) {
         setUserInfo(res.data)
         notification[ 'success' ]({
@@ -148,6 +158,7 @@ body{
       .img {
         width: 26px;
         margin-left: 2px;
+        display: inline;
       }
     }
     .login-form{

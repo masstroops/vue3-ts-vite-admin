@@ -17,11 +17,13 @@ export const useUserStore = defineStore('userStore', () => {
   const logout = () => {
     token.value = ''
     userInfo.value = {}
+    localStorage.removeItem('MY_ACCESS_TOKEN')
+    localStorage.removeItem('USERINFO')
   }
 
   const getUserInfo = () => {
     let token2: string = localStorage.getItem('MY_ACCESS_TOKEN') as string || ''
-    let info = JSON.parse(localStorage.getItem('USERINFO') as string || '')
+    let info = JSON.parse(localStorage.getItem('USERINFO') as string || "{}")
     userInfo.value = info || {}
     token.value = token2
   }
