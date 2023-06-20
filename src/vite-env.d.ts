@@ -21,3 +21,11 @@ declare module 'nprogress' {
   const NProgress: np
   export default NProgress
 }
+
+declare module 'mockjs' {
+  const Mock: {
+    setup: any;
+    mock: any;
+  }
+  export default Mock
+}

@@ -10,7 +10,7 @@
       <template v-if="!item.children">
         <a-menu-item :key="item.key">
           <template #icon>
-            <svg-icon v-if="item.meta.icon" :icon-class="item.meta.icon" />
+            <component v-if="item.meta.icon" :is="item.meta.icon" />
           </template>
           <router-link :to="item.path">
             {{ item.meta.title }}

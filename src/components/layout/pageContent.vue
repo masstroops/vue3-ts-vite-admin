@@ -24,8 +24,7 @@
   import { ref, watch } from 'vue'
   import { useRoute } from 'vue-router'
   const route = useRoute()
-  console.log(route);
-  const breadList = ref([])
+  const breadList = ref<any[]>([])
   const name = ref('')
   const getBreadcrumb = (list: any) => {
     let arr = list.map((item: any, i: any) => {
@@ -66,7 +65,7 @@
     }
   }
   .main {
-    margin: 24px 24px 0;
+    margin: 24px;
   }
 }
 </style>

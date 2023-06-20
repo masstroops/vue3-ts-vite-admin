@@ -17,13 +17,19 @@ const routes:Array<Router.RouteRecordRaw> = [
         path: '/page1',
         component: () => import('@pages/page1/page.vue'),
         name: 'page1',
-        meta: { title: '汇总视图', icon: 'home', permission: ['Bghome'] }
+        meta: { title: '汇总视图', icon: 'home-outlined', permission: ['Bghome'] }
+      },
+      {
+        path: '/itemManage',
+        name: 'itemManage',
+        component: () => import('@pages/itemManage/itemManage.vue'),
+        meta: { title: '项目管理', icon: 'pie-chart-filled', permission: ['dayiManage'] }
       },
       {
         path: '/page2',
         name: 'page2',
         component: RouterView,
-        meta: { title: '数据中心', icon: 'bar-chart', permission: ['order']  },
+        meta: { title: '数据中心', icon: 'pie-chart-filled', permission: ['order']  },
         children: [
           {
             path: '/page2/page',
@@ -37,13 +43,13 @@ const routes:Array<Router.RouteRecordRaw> = [
         path: '/page3',
         name: 'page3',
         component: () => import('@pages/page3/page.vue'),
-        meta: { title: '样品检测', icon: 'bar-chart', permission: ['dayiManage'] }
+        meta: { title: '样品检测', icon: 'pie-chart-filled', permission: ['dayiManage'] }
       },
       {
         path: '/page4',
         name: 'page4',
         component: RouterView,
-        meta: { title: '电镜预约', icon: 'dollar', permission: ['user'] },
+        meta: { title: '电镜预约', icon: 'dollar-circle-filled', permission: ['user'] },
         children: [
           {
             path: '/page4/page2',

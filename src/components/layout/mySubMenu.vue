@@ -1,14 +1,14 @@
 <template>
   <a-sub-menu :key="menuInfo.key">
     <template #icon>
-      <svg-icon v-if="menuInfo.meta.icon" :icon-class="menuInfo.meta.icon" />
+      <component v-if="menuInfo.meta.icon" :is="menuInfo.meta.icon" />
     </template>
     <template #title>{{ menuInfo.meta.title }}</template>
     <template v-for="item in menuInfo.children" :key="item.key">
       <template v-if="!item.children">
         <a-menu-item :key="item.key">
           <template #icon>
-            <svg-icon v-if="item.meta.icon" :icon-class="item.meta.icon" />
+            <component v-if="item.meta.icon" :is="item.meta.icon" />
           </template>
           <router-link :to="item.path">
             {{ item.meta.title }}
