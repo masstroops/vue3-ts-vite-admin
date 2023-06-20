@@ -6,7 +6,7 @@
         <a-button class="ml-[16px]">查询</a-button>
       </div>
       <div>
-        <a-button type="primary">新增</a-button>
+        <a-button @click="add" type="primary">新增</a-button>
       </div>
     </div>
   
@@ -22,11 +22,19 @@
         <template v-if="column.dataIndex === 'name'">{{ text.first }} {{ text.last }}</template>
       </template> -->
     </a-table>
+
+    <EditModal v-model:visible="visible" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
+import EditModal from './modal/manageEditModal.vue'
+
+const visible = ref(false)
+const add = () => {
+  visible.value = true
+}
 
 const itemValue = ref('')
 
@@ -38,19 +46,18 @@ const columns = ref([
   {
     title: 'Name',
     dataIndex: 'name',
-    width: '20%',
+    width: 150,
     resizable: true,
   },
   {
     title: 'Gender',
     dataIndex: 'gender',
-    width: '20%',
+    width: 150,
     resizable: true,
   },
   {
     title: 'Email',
     dataIndex: 'email',
-    resizable: true,
   },
 ])
 const data = ref<any[]>([])
